@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from pydantic_settings import BaseSettings
 import uvicorn
 
@@ -14,13 +14,10 @@ app = FastAPI()
 
 @app.get("/get_info")
 async def get_info():
-    try:
-        return {
-            "app_version": settings.app_version,
-            "app_title": settings.app_title
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+    return {
+        "app_version": settings.app_version,
+        "app_title": settings.app_title
+    }
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

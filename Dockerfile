@@ -1,20 +1,20 @@
 FROM python:3.9-slim
 
-# Set working directory in container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy requirements file
-COPY requirements.txt .
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Install dependencies
+# Install any needed packages specified in requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Copy application code
-COPY main.py .
-COPY .env .
-
-# Expose port 8000
+# Make port 8000 available to the world outside this container
 EXPOSE 8000
 
-# Command to run the application
-CMD ["python3", "main.py"]
+# Define environment variable
+ENV APP_VERSION=1.0
+ENV APP_TITLE="DevOps Cloud Application"
+
+# Run the application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fastapi-lb-service-2023mt03641
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8000"
+    prometheus.io/path: "/metrics"
+    service.kubernetes.io/topology-mode: "auto" 
+spec:
+  type: LoadBalancer
+  selector:
+    app: app2023mt03641
+  ports:
+  - port: 80
+    targetPort: 8000

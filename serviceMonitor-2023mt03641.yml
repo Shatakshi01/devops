@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: servicemonitor-2023mt03641
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: app2023mt03641
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 15s
